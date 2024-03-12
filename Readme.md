@@ -1,28 +1,60 @@
 # React on the Edge
 
-[`sveltekit-on-the-edge`](https://sveltekit-on-the-edge.vercel.app/) but on top of React. It uses `esbuild` for bundling and [Vercel Edge Functions](https://vercel.com/edge) for SSR.
+React on the Edge is a project that leverages Vercel Edge Functions for server-side rendering (SSR) with React, similar to SvelteKit but using React instead. It utilizes esbuild for bundling, providing efficient and fast build times.
 
-This example is for framework builders and advanced usage of the low-level Vercel [Build Output API](https://vercel.com/docs/build-output-api/v3). If you're looking to develop a React application with dynamic Edge capabilities, we recommend [Next.js Middleware](https://nextjs.org/docs/advanced-features/middleware) and [Vercel Edge Functions](https://vercel.com/edge).
+## Introduction
 
-## How to use
+This project is designed for advanced usage and framework builders who want to explore the capabilities of Vercel Edge Functions combined with React. While Next.js Middleware and Vercel Edge Functions are recommended for most React applications with dynamic Edge capabilities, React on the Edge provides a low-level approach for those seeking deeper customization.
 
-Run `pnpm i` then:
+## Getting Started
 
-- To build: `pnpm build`
-- To run a local server: `pnpm start`
+To get started with React on the Edge, follow these steps:
 
-To build this demo with streaming (`renderToStream`) instead of `renderToString` run `USE_STREAMS=1 pnpm build`.
-After building, `.vercel/output` will be created which you can deploy via `vc --prebuilt`.
+1. Install dependencies using pnpm:
+
+```bash
+pnpm install
+```
+
+2. To build the project:
+
+```bash
+pnpm build
+```
+
+3. To run a local server:
+
+```bash
+pnpm start
+```
+
+4. For streaming (renderToStream) instead of renderToString, use the following command:
+
+```bash
+USE_STREAMS=1 pnpm build
+```
 
 ## Architecture
 
-- `util/build.mjs` implements the build process on top of `esbuild` that bundles `src/app` into an Edge Function.
-- `util/start.mjs` implements a local server using the `edge-runtime` package that can locally run the build outputs.
+The project's architecture is as follows:
+
+- `util/build.mjs`: Implements the build process using esbuild to bundle `src/app` into an Edge Function.
+- `util/start.mjs`: Implements a local server using the `edge-runtime` package to locally run the build outputs.
 
 ## Developing
 
-Due to the absence of a dev server, [`watchexec`](https://github.com/watchexec/watchexec) can be used as a replacement. Use `brew install watchexec` to install.
+Due to the absence of a dev server, you can use `watchexec` as a replacement. Install `watchexec` using:
+
+```bash
+brew install watchexec
+```
+
+Then run the following command to watch for changes and rebuild/start the server:
 
 ```bash
 watchexec -c -r --no-meta 'node util/build.mjs; node util/start.mjs'
 ```
+
+## Conclusion
+
+React on the Edge offers a unique approach to server-side rendering with React, leveraging Vercel's powerful Edge Functions. It provides flexibility and control for developers looking to build advanced applications with React while harnessing the benefits of edge computing. Explore the possibilities and unleash the full potential of React on the edge!
